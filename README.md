@@ -1,14 +1,51 @@
 # Project 8: L'Oréal Chatbot
 
-L’Oréal is exploring the power of AI, and your job is to showcase what's possible. Your task is to build a chatbot that helps users discover and understand L’Oréal’s extensive range of products—makeup, skincare, haircare, and fragrances—as well as provide personalized routines and recommendations.
+This project is a vanilla HTML/CSS/JavaScript beauty chatbot for L'Oréal-themed
+product and routine guidance.
 
-## 🚀 Launch via GitHub Codespaces
+## What Is Included
 
-1. In the GitHub repo, click the **Code** button and select **Open with Codespaces → New codespace**.
-2. Once your codespace is ready, open the `index.html` file via the live preview.
+- Premium L'Oréal-inspired chat UI
+- Conversation bubbles for user and assistant
+- Conversation history across turns
+- Latest user question shown above each assistant reply
+- Frontend requests routed through a Cloudflare Worker
+- OpenAI API key stored as a Cloudflare secret
 
-## ☁️ Cloudflare Note
+## Run In Codespaces
 
-When deploying through Cloudflare, make sure your API request body (in `script.js`) includes a `messages` array and handle the response by extracting `data.choices[0].message.content`.
+1. Open this repo in GitHub Codespaces.
+2. Open `index.html` with Live Preview.
 
-Enjoy building your L’Oréal beauty assistant! 💄
+## Cloudflare Worker Setup
+
+1. Deploy the worker:
+
+```bash
+npx wrangler deploy RESOURCE_cloudflare-worker.js --name loreal-chatbot-worker
+```
+
+2. Add your OpenAI API key as a secret:
+
+```bash
+npx wrangler secret put OPENAI_API_KEY --name loreal-chatbot-worker
+```
+
+3. Copy your deployed worker URL (for example,
+   `https://loreal-chatbot-worker.<your-subdomain>.workers.dev`) and set it as
+   `API_URL` in `script.js`.
+
+## Request/Response Shape
+
+- Frontend sends:
+
+```json
+{
+  "messages": [
+    { "role": "system", "content": "..." },
+    { "role": "user", "content": "..." }
+  ]
+}
+```
+
+- Worker returns JSON with a `reply` field (and `choices` for compatibility).

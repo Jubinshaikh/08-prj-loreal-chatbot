@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Assistant</title>
+    <title>L’Oréal Beauty Advisor</title>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -19,48 +19,68 @@
     <div class="page-wrapper">
       <!------- Header / Branding ------->
       <header class="site-header">
-        <h1 class="site-title">Smart Product Advisor</h1>
+        <div class="brand-mark">
+          <img src="img/loreal-logo.png" alt="L’Oréal logo" />
+        </div>
+        <p class="eyebrow">L’Oréal Paris</p>
+        <h1 class="site-title">Beauty Advisor</h1>
+        <p class="site-subtitle">
+          A smart chatbot for products, routines, skincare, haircare, makeup,
+          and fragrance guidance.
+        </p>
+        <div class="feature-chips" aria-label="Key chatbot features">
+          <span>LevelUp 1: Conversation History</span>
+          <span>LevelUp 2: Latest Question Above Reply</span>
+          <span>LevelUp 3: User and Assistant Bubbles</span>
+        </div>
       </header>
 
       <!------- Chat Area ------->
       <main>
         <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
+          <div
+            id="chatWindow"
+            class="chat-window"
+            role="log"
+            aria-live="polite"
+            aria-relevant="additions text"
+            aria-label="Chat conversation"
+            tabindex="0"
+          >
             <!-- messages will be appended here via JS -->
           </div>
 
           <form id="chatForm" class="chat-form">
-            <label for="userInput" class="visually-hidden">Message</label>
+            <label for="userInput" class="visually-hidden"
+              >Ask your beauty question</label
+            >
             <input
               id="userInput"
               name="userInput"
               type="text"
               placeholder="Ask me about products or routines…"
               autocomplete="off"
+              aria-label="Beauty question"
+              aria-describedby="chatHint"
               required
             />
-            <button type="submit" id="sendBtn">
+            <button type="submit" id="sendBtn" aria-label="Send message">
               <span class="material-icons">send</span>
               <span class="visually-hidden">Send</span>
             </button>
           </form>
+          <p id="chatHint" class="input-help">
+            Press Enter to send your question.
+          </p>
         </section>
       </main>
 
       <!------- Footer Links ------->
       <footer class="site-footer">
-        <p>&copy; 2025 Company Name. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Contact</a>
-        </nav>
+        <p>L’Oréal-inspired beauty chatbot experience.</p>
       </footer>
     </div>
 
-    <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
-    <script src="secrets.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
